@@ -8,13 +8,8 @@ import tensorflow as tf
 
 # === Load pre-trained models and preprocessors ===
 # Ensure these files are in your repository
-model_selected = keras.models.load_model(
-    'model_selected.h5', custom_objects={'mse': tf.keras.losses.mean_squared_error}
-)
-
-model_all = keras.models.load_model(
-    'model_all.h5', custom_objects={'mse': tf.keras.losses.mean_squared_error}
-)
+model_selected = keras.models.load_model('model_selected.h5')
+model_all = keras.models.load_model('model_all.h5')
 
 preprocessor_selected = joblib.load('preprocessor_selected.pkl')
 preprocessor_all = joblib.load('preprocessor_all.pkl')
@@ -77,5 +72,3 @@ if st.button("Predict Sale Price"):
         processed_data = preprocessor_all.transform(default_all)
         prediction = model_all.predict(processed_data)
         st.success(f"Predicted Sale Price (All Features Model): ${prediction[0][0]:,.2f}")
-
-
